@@ -1,6 +1,5 @@
-import { PolymerElement } from '../../node_modules/@polymer/polymer/polymer-element.js';
 import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
-import { html } from '../../node_modules/@polymer/polymer/lib/utils/html-tag.js';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 /**
  * `time-counter`

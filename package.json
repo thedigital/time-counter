@@ -10,11 +10,11 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/TherapyChat/time-counter.git"
+    "url": "git+https://github.com/thedigital/time-counter"
   },
-  "homepage": "https://github.com/TherapyChat/time-counter#readme",
-  "name": "@therapychat/time-counter",
-  "version": "1.1.1",
+  "homepage": "https://github.com/thedigital/time-counter#readme",
+  "name": "@thedigital/time-counter",
+  "version": "1.2.0",
   "main": "time-counter.js",
   "directories": {
     "test": "test"
@@ -29,10 +29,10 @@
     "preversion": "npm run lint && npm test",
     "version": "changelog-version && git add CHANGELOG.md"
   },
-  "author": "Alberto Fernandez <albertofdzm@gmail.com> (http://onlythepixel.com)",
+  "author": "Guillaume Ferrand <guillaume.ferrand@gmail.com>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/TherapyChat/time-counter/issues"
+    "url": "https://github.com/thedigital/time-counter/issues"
   },
   "devDependencies": {
     "changelog-version": "^1.0.1",
