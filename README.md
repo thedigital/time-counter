@@ -4,11 +4,11 @@
 
 # \<time-counter\>
 
-Web Component to display an incremental timer
+Web Component to display an incremental timer - version Polymer 3
 
 Intall:
 ```bash
-bower install -S time-counter
+npm install --save time-counter-polymer3
 ```
 
 Example of use:
