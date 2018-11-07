@@ -1,5 +1,5 @@
 {
-  "description": "Web Component to display an incremental timer",
+  "description": "Web Component to display an incremental timer - Polymer 3",
   "keywords": [
     "web-components",
     "web-component",
@@ -13,7 +13,7 @@
     "url": "git+https://github.com/thedigital/time-counter"
   },
   "homepage": "https://github.com/thedigital/time-counter#readme",
-  "name": "@thedigital/time-counter",
+  "name": "@thedigital/time-counter-polymer3",
   "version": "1.2.0",
   "main": "time-counter.js",
   "directories": {
