@@ -1,0 +1,115 @@
+import { PolymerElement } from '../../node_modules/@polymer/polymer/polymer-element.js';
+import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import { html } from '../../node_modules/@polymer/polymer/lib/utils/html-tag.js';
+
+/**
+ * `time-counter`
+ * Web Component to display an incremental timer
+ *
+ * @customElement
+ * @polymer
+ * @demo demo/index.html
+ */
+Polymer({
+  _template: html`
+    <style>
+      :host {
+        display: inline-block;
+      }
+    </style>
+
+    <span>[[_formatDuration(duration, format)]]</span>
+`,
+
+  is: 'time-counter',
+
+  properties: {
+    /**
+     * The current duration in milliseconds
+     */
+    duration: {
+      type: Number,
+      notify: true,
+      value: 0
+    },
+    /**
+     * If set the duration will adapt as if it sarts counting from that date
+     */
+    startDate: {
+      type: Number,
+      observer: '_handleStartDateChanged'
+    },
+    /**
+     * Output format for duration
+     */
+    format: {
+      type: String,
+      value: 'hh:mm:ss'
+    }
+  },
+
+  _calcDuration: function (startDate, endDate) {
+    startDate = startDate || Date.now()
+    endDate = endDate || Date.now()
+
+    return endDate - startDate
+  },
+
+  _formatDuration: function (duration, format) {
+    var formattedDuration = ''
+
+    if (format) {
+      var durationInSeconds = Math.floor(duration / 1000)
+      var hours = Math.floor(durationInSeconds / 3600)
+      var minutes = Math.floor((durationInSeconds % 3600) / 60)
+      var seconds = durationInSeconds % 60
+
+      formattedDuration = format
+        .replace(/(h+)/g, function (match, group) {
+          return this._formatNumber(hours, group.length)
+        }.bind(this))
+        .replace(/(m+)/g, function (match, group) {
+          return this._formatNumber(minutes, group.length)
+        }.bind(this))
+        .replace(/(s+)/g, function (match, group) {
+          return this._formatNumber(seconds, group.length)
+        }.bind(this))
+    } else {
+      formattedDuration = this._formatNumber(hours) + ':' + this._formatNumber(minutes) + ':' + this._formatNumber(seconds)
+    }
+
+    return formattedDuration
+  },
+
+  _formatNumber: function (value, length) {
+    value = isNaN(value) ? '' : '' + value
+    length = length !== undefined ? length : 2
+
+    while (value.length < length) {
+      value = '0' + value
+    }
+
+    return value.substr(-length)
+  },
+
+  _handleStartDateChanged: function (startDate) {
+    if (startDate) {
+      this._updateDuration()
+      this._updateDurationDebounced()
+    } else if (this.isDebouncerActive('updateDuration')) {
+      this.cancelDebouncer('updateDuration')
+      this.duration = this.properties.duration.value
+    }
+  },
+
+  _updateDuration: function () {
+    this.duration = this._calcDuration(this.startDate)
+  },
+
+  _updateDurationDebounced: function () {
+    this.debounce('updateDuration', function () {
+      this._updateDuration()
+      this._updateDurationDebounced()
+    }, 500)
+  }
+})
